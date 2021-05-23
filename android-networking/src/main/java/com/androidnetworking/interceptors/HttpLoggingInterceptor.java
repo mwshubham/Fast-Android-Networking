@@ -19,6 +19,8 @@
 
 package com.androidnetworking.interceptors;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -112,12 +114,7 @@ public class HttpLoggingInterceptor implements Interceptor {
         /**
          * A {@link Logger} defaults output appropriate for the current platform.
          */
-        Logger DEFAULT = new Logger() {
-            @Override
-            public void log(String message) {
-                Platform.get().log(INFO, message, null);
-            }
-        };
+        Logger DEFAULT = message -> Platform.get().log(message, INFO, null);
     }
 
     public HttpLoggingInterceptor() {
@@ -145,6 +142,7 @@ public class HttpLoggingInterceptor implements Interceptor {
         return level;
     }
 
+    @NotNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Level level = this.level;
@@ -205,6 +203,7 @@ public class HttpLoggingInterceptor implements Interceptor {
 
                 logger.log("");
                 if (isPlaintext(buffer)) {
+                    assert charset != null;
                     logger.log(buffer.readString(charset));
                     logger.log("--> END " + request.method()
                             + " (" + requestBody.contentLength() + "-byte body)");
@@ -226,7 +225,11 @@ public class HttpLoggingInterceptor implements Interceptor {
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
 
         ResponseBody responseBody = response.body();
-        long contentLength = responseBody.contentLength();
+        long contentLength = -1;
+        if (responseBody != null){
+            contentLength = responseBody.contentLength();
+        }
+
         String bodySize = contentLength != -1 ? contentLength + "-byte" : "unknown-length";
         logger.log("<-- " + response.code() + ' ' + response.message() + ' '
                 + response.request().url() + " (" + tookMs + "ms" + (!logHeaders ? ", "

@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Headers;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -160,27 +159,21 @@ public final class InternalNetworking {
 
             if (request.getOkHttpClient() != null) {
                 okHttpClient = request.getOkHttpClient().newBuilder().cache(sHttpClient.cache())
-                        .addNetworkInterceptor(new Interceptor() {
-                            @Override
-                            public Response intercept(Chain chain) throws IOException {
-                                Response originalResponse = chain.proceed(chain.request());
-                                return originalResponse.newBuilder()
-                                        .body(new ResponseProgressBody(originalResponse.body(),
-                                                request.getDownloadProgressListener()))
-                                        .build();
-                            }
+                        .addNetworkInterceptor(chain -> {
+                            Response originalResponse = chain.proceed(chain.request());
+                            return originalResponse.newBuilder()
+                                    .body(new ResponseProgressBody(originalResponse.body(),
+                                            request.getDownloadProgressListener()))
+                                    .build();
                         }).build();
             } else {
                 okHttpClient = sHttpClient.newBuilder()
-                        .addNetworkInterceptor(new Interceptor() {
-                            @Override
-                            public Response intercept(Chain chain) throws IOException {
-                                Response originalResponse = chain.proceed(chain.request());
-                                return originalResponse.newBuilder()
-                                        .body(new ResponseProgressBody(originalResponse.body(),
-                                                request.getDownloadProgressListener()))
-                                        .build();
-                            }
+                        .addNetworkInterceptor(chain -> {
+                            Response originalResponse = chain.proceed(chain.request());
+                            return originalResponse.newBuilder()
+                                    .body(new ResponseProgressBody(originalResponse.body(),
+                                            request.getDownloadProgressListener()))
+                                    .build();
                         }).build();
             }
             request.setCall(okHttpClient.newCall(okHttpRequest));
