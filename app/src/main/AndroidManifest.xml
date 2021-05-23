@@ -37,10 +37,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ImageGridActivity"></activity>
-        <activity android:name=".ApiTestActivity"></activity>
-        <activity android:name=".OkHttpResponseTestActivity"></activity>
-        <activity android:name=".WebSocketActivity"></activity>
+        <activity android:name=".ImageGridActivity" />
+        <activity android:name=".ApiTestActivity" />
+        <activity android:name=".OkHttpResponseTestActivity" />
+        <activity android:name=".WebSocketActivity" />
     </application>
 
 </manifest>
