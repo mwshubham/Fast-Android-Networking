@@ -38,7 +38,7 @@ import rx.schedulers.Schedulers;
 public class SubscriptionActivity extends AppCompatActivity {
 
     private static final String TAG = SubscriptionActivity.class.getSimpleName();
-    private static final String URL = "http://i.imgur.com/AtbX9iX.png";
+    private static final String URL = "https://i.imgur.com/AtbX9iX.png";
     private String dirPath;
     private String fileName = "imgurimage.png";
     Subscription subscription;

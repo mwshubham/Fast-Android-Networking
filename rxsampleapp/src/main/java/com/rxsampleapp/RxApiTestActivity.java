@@ -418,7 +418,7 @@ public class RxApiTestActivity extends AppCompatActivity {
     }
 
     public void downloadImage(final View view) {
-        String url = "http://i.imgur.com/AtbX9iX.png";
+        String url = "https://i.imgur.com/AtbX9iX.png";
         RxAndroidNetworking.download(url, Utils.getRootDirPath(getApplicationContext()), "image1.png")
                 .build()
                 .setAnalyticsListener(new AnalyticsListener() {
@@ -531,7 +531,7 @@ public class RxApiTestActivity extends AppCompatActivity {
     }
 
     public void loadImage(View view) {
-        final String URL_IMAGE = "http://i.imgur.com/2M7Hasn.png";
+        final String URL_IMAGE = "https://i.imgur.com/2M7Hasn.png";
         RxAndroidNetworking.get(URL_IMAGE)
                 .setImageScaleType(null)
                 .setBitmapMaxHeight(0)

@@ -393,7 +393,7 @@ public class ApiTestActivity extends AppCompatActivity {
     }
 
     public void downloadImage(final View view) {
-        String url = "http://i.imgur.com/AtbX9iX.png";
+        String url = "https://i.imgur.com/AtbX9iX.png";
         AndroidNetworking.download(url, Utils.getRootDirPath(getApplicationContext()), "image1.png")
                 .setPriority(Priority.MEDIUM)
                 .setTag(this)
@@ -692,7 +692,7 @@ public class ApiTestActivity extends AppCompatActivity {
     }
 
     public void cleanupDestinationTest(View view) {
-        String url = "http://i.imgur.com/m6K1DCQ.jpg";
+        String url = "https://i.imgur.com/m6K1DCQ.jpg";
         AndroidNetworking.download(url, Utils.getRootDirPath(getApplicationContext()), "cleanupDestinationTest.jpg")
                 .setPriority(Priority.HIGH)
                 .setTag("cleanupDestinationTest")

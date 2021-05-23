@@ -41,8 +41,8 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String URL_IMAGE = "http://i.imgur.com/2M7Hasn.png";
-    private static final String URL_IMAGE_LOADER = "http://i.imgur.com/52md06W.jpg";
+    private static final String URL_IMAGE = "https://i.imgur.com/2M7Hasn.png";
+    private static final String URL_IMAGE_LOADER = "https://i.imgur.com/52md06W.jpg";
 
     private ImageView imageView;
     @SuppressWarnings("FieldCanBeLocal")
